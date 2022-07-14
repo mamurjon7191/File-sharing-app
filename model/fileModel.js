@@ -1,6 +1,6 @@
-const mongoose = require("mongooses");
+const mongoose = require("mongoose");
 
-const fileScheme = new mongoose.Scheme({
+const fileScheme = new mongoose.Schema({
   filename: {
     type: String,
     required: true,
