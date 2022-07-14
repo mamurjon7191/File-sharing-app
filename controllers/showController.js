@@ -1,8 +1,9 @@
 const File = require("../model/fileModel");
 
 const showController = async (req, res) => {
-  const file = await File.findById(req.params.uuid);
-  res.render("downloads", { file });
+  const file = await File.findOne({ uuid: req.params.uuid });
+  const downloadUrl = `${process.env.APP_BASE_URL}/download/${file.uuid}`;
+  res.render("downloads", { downloadUrl });
 };
 
 module.exports = showController;
