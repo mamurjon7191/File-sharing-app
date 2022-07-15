@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <button>
-      <a href="<%= downloadUrl %>">Download uchun link</a>
-    </button>
-  </body>
-</html>
+<div class="download">
+  <div class="download-page">
+    <img src="/Screen Shot 2022-07-15 at 7.44.38 AM.png" alt="" />
+    <h1>Your file is ready to download</h1>
+    <p>Link Expires in 24 hours</p>
+    <h3><%- file.filename%></h3>
+    <p><%- file.size%> KB</p>
+   <% if(file.password!=undefined){ %>
+  <div style="text-align: center">
+    <h1>Faylingiz parolli ekan iltimos Faylni yuklab olish uchun parolni kiriting</h1>
+  </div>
+    <form action="/submit-password/<%-file.uuid%>" method="post">
+    <input type="Password" placeholder="Fayl parolli bolsa parolni kiriting" style="width: 500px ;height:30px;font-size: 1.4rem;"  name="parol" >
+    </form>
+    <% } else{%>
+      <a href="<%= downloadUrl %>" class="link">Download uchun link</a>
+      <% }%>
+  </div>
+</section>

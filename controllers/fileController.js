@@ -1,4 +1,5 @@
 const multer = require("multer");
+const bcrypt = require("bcrypt");
 const File = require("../model/fileModel");
 const path = require("path");
 
@@ -26,6 +27,10 @@ const upload = multer({
 const fileUpload = (req, res) => {
   try {
     upload(req, res, async (err) => {
+      let hashPassword = undefined;
+      if (req.body.password) {
+        hashPassword = await bcrypt.hash(req.body.password, 12);
+      }
       if (err) {
         res.status(404).json({
           status: "failed",
@@ -36,6 +41,7 @@ const fileUpload = (req, res) => {
         path: req.file.path,
         size: req.file.size,
         uuid: uuidv4(),
+        password: hashPassword,
       });
 
       res.status(201).json({
